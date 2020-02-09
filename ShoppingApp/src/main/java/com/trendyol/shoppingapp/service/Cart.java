@@ -27,13 +27,17 @@ public class Cart {
         Product almond = new Product("Almond", 150.0, food);
         Campaign c1 = new Campaign(food, 2.5, 4, DiscountType.Amount);
         List<Double> discounts = new ArrayList();
+        discounts.add(cart.getCampaignDiscount(c1));
+        cart.applyDiscounts(discounts);
+
         Coupon cup1 = new Coupon(100, 10, DiscountType.Rate);
+        cart.applyCoupon(cup1);
         cart.addItem(apple, 5);
         cart.addItem(almond, 3);
         double price = cart.getTotalAmountsAfterDiscounts();
-        double cDisc = cart.getCouponDiscount(c1);
-        double cmDisc = cart.getCampaignDiscount();
+        double cDisc = cart.getCouponDiscount(cup1);
+        double cmDisc = cart.getCampaignDiscount(c1);
         double dCost = cart.getDeliveryCost();
-        return apple.getPrice() * cart.getItems().get(apple) - c1.getDiscount();
+        return cart.getDeliveryCost();
     }
 }

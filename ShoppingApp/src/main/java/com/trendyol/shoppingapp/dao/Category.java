@@ -9,7 +9,7 @@ package com.trendyol.shoppingapp.dao;
  *
  * @author LuffythePhoenix
  */
-public class Category {
+public final class Category {
 
     private String title;
     private Campaign campaign;
