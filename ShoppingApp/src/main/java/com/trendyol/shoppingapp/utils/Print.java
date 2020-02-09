@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.trendyol.shoppingapp.dao;
-
-import com.trendyol.shoppingapp.enums.DiscountType;
+package com.trendyol.shoppingapp.utils;
 
 /**
  *
  * @author LuffythePhoenix
  */
-public class Discounts {
-    Category cat1 = new Category();
-    Campaign cmp1 = new Campaign(cat1, 20.0, 3, DiscountType.Rate);
+public class Print {
+    
 }
