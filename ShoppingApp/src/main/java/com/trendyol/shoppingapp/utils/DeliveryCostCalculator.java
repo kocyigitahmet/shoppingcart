@@ -5,10 +5,52 @@
  */
 package com.trendyol.shoppingapp.utils;
 
+import com.trendyol.shoppingapp.dao.ShoppingCart;
+
 /**
  *
  * @author LuffythePhoenix
  */
-public class DeliveryCostCalculator {
-    
+public final class DeliveryCostCalculator {
+
+    private double costPerDelivery;
+    private double costPerProduct;
+    private double fixedCost;
+
+    public DeliveryCostCalculator(double costPerDelivery, double costPerProduct,
+            double fixedCost) {
+
+        setFixedCost(fixedCost);
+        setCostPerDelivery(costPerDelivery);
+        setCostPerProduct(costPerProduct);
+
+    }
+
+    public double getCostPerDelivery() {
+        return costPerDelivery;
+    }
+
+    public void setCostPerDelivery(double costPerDelivery) {
+        this.costPerDelivery = costPerDelivery;
+    }
+
+    public double getCostPerProduct() {
+        return costPerProduct;
+    }
+
+    public void setCostPerProduct(double costPerProduct) {
+        this.costPerProduct = costPerProduct;
+    }
+
+    public double getFixedCost() {
+        return fixedCost;
+    }
+
+    public void setFixedCost(double fixedCost) {
+        this.fixedCost = fixedCost;
+    }
+
+    public double calculate(ShoppingCart cart) {
+    }
+
 }
