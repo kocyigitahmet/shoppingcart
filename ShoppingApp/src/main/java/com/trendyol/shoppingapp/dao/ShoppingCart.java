@@ -5,6 +5,7 @@
  */
 package com.trendyol.shoppingapp.dao;
 
+import com.trendyol.shoppingapp.enums.DiscountType;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,13 +13,17 @@ import java.util.List;
  *
  * @author LuffythePhoenix
  */
-public class ShoppingCart {
+public final class ShoppingCart {
 
     private HashMap<Product, Integer> items;
-    private Campaign campaign;
-    private Coupon coupon;
+    private double price;
+    private double cmpDiscount;
+    private double cpnDiscount;
 
     public ShoppingCart() {
+        price = 0;
+        cmpDiscount = 0;
+        cpnDiscount = 0;
         items = new HashMap<>();
     }
 
@@ -26,27 +31,8 @@ public class ShoppingCart {
         return items;
     }
 
-    public void setItems(HashMap<Product, Integer> items) {
-        this.items = items;
-    }
-
-    public Campaign getCampaign() {
-        return campaign;
-    }
-
-    public void setCampaign(Campaign campaign) {
-        this.campaign = campaign;
-    }
-
-    public Coupon getCoupon() {
-        return coupon;
-    }
-
-    public void setCoupon(Coupon coupon) {
-        this.coupon = coupon;
-    }
-
     public void addItem(Product p, Integer count) {
+        price += p.getPrice() * count;
         if (items.get(p) == null) {
             items.put(p, count);
         } else {
@@ -55,16 +41,75 @@ public class ShoppingCart {
         }
     }
 
-    public void applyDiscounts(List<Campaign> cList) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public double getPrice() {
+        return price;
     }
 
-    public double getCampaignDiscount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-    public double getCouponDiscount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public double getCmpDiscount() {
+        return cmpDiscount;
+    }
+
+    public void setCmpDiscount(double cmpDiscount) {
+        this.cmpDiscount = cmpDiscount;
+    }
+
+    public double getCpnDiscount() {
+        return cpnDiscount;
+    }
+
+    public void setCpnDiscount(double cpnDiscount) {
+        this.cpnDiscount = cpnDiscount;
+    }
+
+    public void applyDiscounts(List<Double> cList) {
+        for (Double d : cList) {
+            if (d > cmpDiscount) {
+                cmpDiscount = d;
+            }
+        }
+    }
+
+    public void applyCoupon(Coupon coupon) {
+        if (price - cmpDiscount >= coupon.getMinprice()) {
+            if (coupon.getDiscountType() == DiscountType.Amount) {
+                cpnDiscount = coupon.getDiscount();
+            } else {
+                cpnDiscount = price * coupon.getDiscount() / 100;
+            }
+        }
+    }
+
+    public double getCampaignDiscount(Campaign campaign) {
+        int count = 0;
+        for (Product product : items.keySet()) {
+            if (product.getCategory() == campaign.getCategory()) {
+                count++;
+            }
+        }
+        if (count < campaign.getMinItem()) {
+            return 0;
+        } else {
+            if (campaign.getDiscountType() == DiscountType.Amount) {
+                return campaign.getDiscount();
+            } else {
+                return price * campaign.getDiscount() / 100;
+            }
+        }
+    }
+
+    public double getCouponDiscount(Coupon coupon) {
+        if (price - cmpDiscount >= coupon.getMinprice()) {
+            if (coupon.getDiscountType() == DiscountType.Amount) {
+                return coupon.getDiscount();
+            } else {
+                return price * coupon.getDiscount() / 100;
+            }
+        }
+        return 0;
     }
 
     public double getDeliveryCost() {
@@ -72,7 +117,6 @@ public class ShoppingCart {
     }
 
     public double getTotalAmountsAfterDiscounts() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return price - cmpDiscount - cpnDiscount;
     }
-
 }
