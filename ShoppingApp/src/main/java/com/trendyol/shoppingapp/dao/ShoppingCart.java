@@ -15,8 +15,7 @@ import java.util.List;
 public class ShoppingCart {
 
     private HashMap<Product, Integer> items;
-    private Campaign campaign;
-    private Coupon coupon;
+    private double discount;
 
     public ShoppingCart() {
         items = new HashMap<>();
@@ -30,22 +29,6 @@ public class ShoppingCart {
         this.items = items;
     }
 
-    public Campaign getCampaign() {
-        return campaign;
-    }
-
-    public void setCampaign(Campaign campaign) {
-        this.campaign = campaign;
-    }
-
-    public Coupon getCoupon() {
-        return coupon;
-    }
-
-    public void setCoupon(Coupon coupon) {
-        this.coupon = coupon;
-    }
-
     public void addItem(Product p, Integer count) {
         if (items.get(p) == null) {
             items.put(p, count);
@@ -55,12 +38,12 @@ public class ShoppingCart {
         }
     }
 
-    public void applyDiscounts(List<Campaign> cList) {
+    public void applyDiscounts(List<Double> cList) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public double getCampaignDiscount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public double getCampaignDiscount(Campaign campaign) {
+        return 0;
     }
 
     public double getCouponDiscount() {
@@ -74,5 +57,4 @@ public class ShoppingCart {
     public double getTotalAmountsAfterDiscounts() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 }

@@ -24,8 +24,6 @@ public final class Campaign {
         setId(UUID.randomUUID().toString());
     }
 
-    
-
     public Campaign(Category category, double discount, int minItem, DiscountType discountType) {
         setId(UUID.randomUUID().toString());
         setCategory(category);
@@ -73,5 +71,4 @@ public final class Campaign {
     public void setDiscountType(DiscountType discountType) {
         this.discountType = discountType;
     }
-
 }

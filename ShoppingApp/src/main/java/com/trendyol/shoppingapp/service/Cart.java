@@ -26,13 +26,12 @@ public class Cart {
         Product apple = new Product("Apple", 100.0, food);
         Product almond = new Product("Almond", 150.0, food);
         Campaign c1 = new Campaign(food, 2.5, 4, DiscountType.Amount);
-        List<Campaign> cList = new ArrayList();
+        List<Double> discounts = new ArrayList();
         Coupon cup1 = new Coupon(100, 10, DiscountType.Rate);
         cart.addItem(apple, 5);
         cart.addItem(almond, 3);
-        cart.applyDiscounts(cList);
         double price = cart.getTotalAmountsAfterDiscounts();
-        double cDisc = cart.getCouponDiscount();
+        double cDisc = cart.getCouponDiscount(c1);
         double cmDisc = cart.getCampaignDiscount();
         double dCost = cart.getDeliveryCost();
         return apple.getPrice() * cart.getItems().get(apple) - c1.getDiscount();
