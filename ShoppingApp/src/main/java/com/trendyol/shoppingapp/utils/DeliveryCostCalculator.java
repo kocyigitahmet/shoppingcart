@@ -51,6 +51,7 @@ public final class DeliveryCostCalculator {
     }
 
     public double calculate(ShoppingCart cart) {
+        return 0;
     }
 
 }
