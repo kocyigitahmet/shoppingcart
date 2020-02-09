@@ -14,10 +14,10 @@ import java.util.UUID;
  */
 public final class Coupon {
 
-    String id;
-    double minprice;
-    double discount;
-    DiscountType discountType;
+    private String id;
+    private double minprice;
+    private double discount;
+    private DiscountType discountType;
 
     public Coupon() {
         setId(UUID.randomUUID().toString());
