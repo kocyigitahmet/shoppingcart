@@ -11,6 +11,8 @@ import com.trendyol.shoppingapp.dao.Coupon;
 import com.trendyol.shoppingapp.dao.Product;
 import com.trendyol.shoppingapp.dao.ShoppingCart;
 import com.trendyol.shoppingapp.enums.DiscountType;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -23,11 +25,16 @@ public class Cart {
         Category food = new Category("food");
         Product apple = new Product("Apple", 100.0, food);
         Product almond = new Product("Almond", 150.0, food);
+        Campaign c1 = new Campaign(food, 2.5, 4, DiscountType.Amount);
+        List<Campaign> cList = new ArrayList();
+        Coupon cup1 = new Coupon(100, 10, DiscountType.Rate);
         cart.addItem(apple, 5);
         cart.addItem(almond, 3);
-        Campaign c1 = new Campaign(food, 2.5, 4, DiscountType.Amount);
-        Coupon cup1 = new Coupon(100,10,DiscountType.Rate);
+        cart.applyDiscounts(cList);
+        double price = cart.getTotalAmountsAfterDiscounts();
+        double cDisc = cart.getCouponDiscount();
+        double cmDisc = cart.getCampaignDiscount();
+        double dCost = cart.getDeliveryCost();
         return apple.getPrice() * cart.getItems().get(apple) - c1.getDiscount();
     }
-
 }
