@@ -5,8 +5,11 @@
  */
 package com.trendyol.shoppingapp.utils;
 
+import com.trendyol.shoppingapp.dao.Category;
 import com.trendyol.shoppingapp.dao.Product;
 import com.trendyol.shoppingapp.dao.ShoppingCart;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -52,10 +55,15 @@ public final class DeliveryCostCalculator {
     }
 
     public double calculateFor(ShoppingCart cart) {
+        List<Category> deliveries = new ArrayList<>();
         for (Product product : cart.getItems().keySet()) {
-
+            if (!deliveries.contains(product.getCategory())) {
+                deliveries.add(product.getCategory());
+            }
         }
-        return 0;
+        int numofDeliveries = deliveries.size();
+        int numofProducts = cart.getItems().size();
+        return (getCostPerDelivery() * numofDeliveries) + (getCostPerProduct() * numofProducts) + getFixedCost();
     }
 
 }
