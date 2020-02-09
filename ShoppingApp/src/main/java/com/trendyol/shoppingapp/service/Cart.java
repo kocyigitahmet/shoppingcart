@@ -19,13 +19,14 @@ import com.trendyol.shoppingapp.enums.DiscountType;
 public class Cart {
 
     public double calcDeliveryCost(ShoppingCart cart) {
+
         Category food = new Category("food");
         Product apple = new Product("Apple", 100.0, food);
         Product almond = new Product("Almond", 150.0, food);
         cart.addItem(apple, 5);
         cart.addItem(almond, 3);
         Campaign c1 = new Campaign(food, 2.5, 4, DiscountType.Amount);
-        Coupon cup1 = new Coupon();
+        Coupon cup1 = new Coupon(100,10,DiscountType.Rate);
         return apple.getPrice() * cart.getItems().get(apple) - c1.getDiscount();
     }
 

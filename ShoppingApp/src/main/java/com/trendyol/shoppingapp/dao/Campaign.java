@@ -6,23 +6,40 @@
 package com.trendyol.shoppingapp.dao;
 
 import com.trendyol.shoppingapp.enums.DiscountType;
+import java.util.UUID;
 
 /**
  *
  * @author LuffythePhoenix
  */
-public class Campaign {
+public final class Campaign {
 
+    private String id;
     private Category category;
     private double discount;
     private int minItem;
     private DiscountType discountType;
 
+    public Campaign() {
+        setId(UUID.randomUUID().toString());
+    }
+
+    
+
     public Campaign(Category category, double discount, int minItem, DiscountType discountType) {
+        setId(UUID.randomUUID().toString());
         setCategory(category);
         setDiscount(discount);
         setMinItem(minItem);
         setDiscountType(discountType);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Category getCategory() {
