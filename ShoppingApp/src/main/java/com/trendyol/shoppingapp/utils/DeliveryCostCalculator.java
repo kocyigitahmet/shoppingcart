@@ -5,6 +5,7 @@
  */
 package com.trendyol.shoppingapp.utils;
 
+import com.trendyol.shoppingapp.dao.Product;
 import com.trendyol.shoppingapp.dao.ShoppingCart;
 
 /**
@@ -50,7 +51,10 @@ public final class DeliveryCostCalculator {
         this.fixedCost = fixedCost;
     }
 
-    public double calculate(ShoppingCart cart) {
+    public double calculateFor(ShoppingCart cart) {
+        for (Product product : cart.getItems().keySet()) {
+
+        }
         return 0;
     }
 
