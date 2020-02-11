@@ -16,6 +16,9 @@ public final class Product {
     private Category category;
 
     public Product() {
+        title = new String();
+        price = 0;
+        category = new Category();
     }
 
     public Product(String title, double price, Category category) {

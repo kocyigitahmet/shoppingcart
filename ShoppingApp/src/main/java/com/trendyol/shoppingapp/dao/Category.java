@@ -9,16 +9,18 @@ package com.trendyol.shoppingapp.dao;
  *
  * @author LuffythePhoenix
  */
-public final class Category {
+public final class Category implements Comparable<Category> {
 
     private String title;
-    private Campaign campaign;
     private Category parentCategory;
 
     public Category() {
+        parentCategory = null;
+        title = new String();
     }
 
     public Category(String title) {
+        parentCategory = null;
         setTitle(title);
     }
 
@@ -30,19 +32,16 @@ public final class Category {
         this.title = title;
     }
 
-    public Campaign getCampaign() {
-        return campaign;
-    }
-
-    public void setCampaign(Campaign campaign) {
-        this.campaign = campaign;
-    }
-
     public Category getParentCategory() {
         return parentCategory;
     }
 
     public void setParentCategory(Category parentCategory) {
         this.parentCategory = parentCategory;
+    }
+
+    @Override
+    public int compareTo(Category otherC) {
+        return this.getTitle().compareTo(otherC.getTitle());
     }
 }

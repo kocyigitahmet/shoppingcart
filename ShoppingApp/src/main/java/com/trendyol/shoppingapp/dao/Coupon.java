@@ -21,6 +21,10 @@ public final class Coupon {
 
     public Coupon() {
         setId(UUID.randomUUID().toString());
+        minprice = 0;
+        discount = 0;
+        //Rate was assumed as default discount.
+        discountType = DiscountType.Rate;
     }
 
     public Coupon(double minprice, double discount, DiscountType discountType) {

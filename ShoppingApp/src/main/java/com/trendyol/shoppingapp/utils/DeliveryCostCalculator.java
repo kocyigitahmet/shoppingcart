@@ -21,13 +21,17 @@ public final class DeliveryCostCalculator {
     private double costPerProduct;
     private double fixedCost;
 
+    public DeliveryCostCalculator() {
+        fixedCost = 2.99;
+        costPerDelivery = 5;
+        costPerProduct = 1;
+    }
+
     public DeliveryCostCalculator(double costPerDelivery, double costPerProduct,
             double fixedCost) {
-
-        setFixedCost(fixedCost);
-        setCostPerDelivery(costPerDelivery);
-        setCostPerProduct(costPerProduct);
-
+        fixedCost = 2.99;
+        this.costPerDelivery = costPerDelivery;
+        this.costPerProduct = costPerProduct;
     }
 
     public double getCostPerDelivery() {

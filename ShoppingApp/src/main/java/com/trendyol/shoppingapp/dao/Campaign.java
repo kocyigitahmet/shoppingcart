@@ -13,7 +13,6 @@ import java.util.UUID;
  * @author LuffythePhoenix
  */
 public final class Campaign {
-
     private String id;
     private Category category;
     private double discount;
@@ -22,6 +21,11 @@ public final class Campaign {
 
     public Campaign() {
         setId(UUID.randomUUID().toString());
+        category = new Category();
+        discount = 0;
+        minItem = 0;
+        //Rate was assumed as default discount.
+        discountType = DiscountType.Rate;
     }
 
     public Campaign(Category category, double discount, int minItem, DiscountType discountType) {

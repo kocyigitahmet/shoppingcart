@@ -6,31 +6,35 @@
 package com.trendyol.shoppingapp.dao;
 
 import com.trendyol.shoppingapp.enums.DiscountType;
+import com.trendyol.shoppingapp.utils.DeliveryCostCalculator;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  *
  * @author LuffythePhoenix
  */
 public final class ShoppingCart {
-
-    private HashMap<Product, Integer> items;
+    
+    private Map<Product, Integer> items;
     private double price;
     private double cmpDiscount;
     private double cpnDiscount;
-
+    
     public ShoppingCart() {
         price = 0;
         cmpDiscount = 0;
         cpnDiscount = 0;
         items = new HashMap<>();
     }
-
-    public HashMap<Product, Integer> getItems() {
+    
+    public Map<Product, Integer> getItems() {
         return items;
     }
-
+    
     public void addItem(Product p, Integer count) {
         price += p.getPrice() * count;
         if (items.get(p) == null) {
@@ -40,31 +44,31 @@ public final class ShoppingCart {
             items.replace(p, count);
         }
     }
-
+    
     public double getPrice() {
         return price;
     }
-
+    
     public void setPrice(double price) {
         this.price = price;
     }
-
+    
     public double getCmpDiscount() {
         return cmpDiscount;
     }
-
+    
     public void setCmpDiscount(double cmpDiscount) {
         this.cmpDiscount = cmpDiscount;
     }
-
+    
     public double getCpnDiscount() {
         return cpnDiscount;
     }
-
+    
     public void setCpnDiscount(double cpnDiscount) {
         this.cpnDiscount = cpnDiscount;
     }
-
+    
     public void applyDiscounts(List<Double> cList) {
         for (Double d : cList) {
             if (d > cmpDiscount) {
@@ -72,7 +76,7 @@ public final class ShoppingCart {
             }
         }
     }
-
+    
     public void applyCoupon(Coupon coupon) {
         if (price - cmpDiscount >= coupon.getMinprice()) {
             if (coupon.getDiscountType() == DiscountType.Amount) {
@@ -82,7 +86,7 @@ public final class ShoppingCart {
             }
         }
     }
-
+    
     public double getCampaignDiscount(Campaign campaign) {
         int count = 0;
         for (Product product : items.keySet()) {
@@ -100,7 +104,7 @@ public final class ShoppingCart {
             }
         }
     }
-
+    
     public double getCouponDiscount(Coupon coupon) {
         if (price - cmpDiscount >= coupon.getMinprice()) {
             if (coupon.getDiscountType() == DiscountType.Amount) {
@@ -111,12 +115,21 @@ public final class ShoppingCart {
         }
         return 0;
     }
-
+    
     public double getDeliveryCost() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        DeliveryCostCalculator dcc = new DeliveryCostCalculator();
+        return dcc.calculateFor(this);
     }
-
+    
     public double getTotalAmountsAfterDiscounts() {
         return price - cmpDiscount - cpnDiscount;
+    }
+    
+    public void print() {
+        List<Product> products = items.keySet().stream().sorted(Comparator.comparing(Product::getCategory)).collect(Collectors.toList());
+        for (Product p : products) {
+            System.out.println(p.getCategory().getTitle() + "\t" + p.getTitle() + "\t" + items.get(p) + "\t" + p.getPrice());
+        }
+        System.out.println(getPrice() + "\t" + getTotalAmountsAfterDiscounts());
     }
 }

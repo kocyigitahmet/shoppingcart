@@ -1,2 +1,8 @@
-com/trendyol/shoppingapp/ShoppingAppApplication.class
-com/trendyol/shoppingapp/service/ShoppingService.class
+com\trendyol\shoppingapp\dao\Product.class
+com\trendyol\shoppingapp\dao\Coupon.class
+com\trendyol\shoppingapp\ShoppingAppApplication.class
+com\trendyol\shoppingapp\dao\ShoppingCart.class
+com\trendyol\shoppingapp\enums\DiscountType.class
+com\trendyol\shoppingapp\utils\DeliveryCostCalculator.class
+com\trendyol\shoppingapp\dao\Campaign.class
+com\trendyol\shoppingapp\dao\Category.class
